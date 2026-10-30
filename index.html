@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parivar Cafe – Vegetarian Banquet Menu</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+:root{--g:#0b3d2e;--g2:#1b5a43;--gold:#d4af5f;--gd:#8a6a22;--cream:#f7f3e8;--ink:#1c2a22;--line:#dccb94;--err:#b3261e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:Lora,Georgia,serif;line-height:1.5}
+.wrap{max-width:1000px;margin:0 auto;padding:16px 16px 120px}
+header{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;text-align:left;padding:12px 0 4px}
+.logo{height:84px;width:auto;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:6px;display:block}
+#flogo{margin:0 auto 12px}
+header h1{font:700 clamp(2rem,6vw,3.2rem) 'Playfair Display',serif;color:var(--g);margin:0}
+header p{margin:0;font-style:italic;color:var(--g2)}
+.banner{background:linear-gradient(135deg,#0b3d2e,#15593f);border:3px solid var(--gold);border-radius:28px;text-align:center;padding:18px 12px;margin:16px 0}
+.banner h2{margin:0;font:700 clamp(1.4rem,5vw,2.6rem) 'Playfair Display',serif;color:var(--gold);letter-spacing:.04em}
+.banner span{color:#fff;letter-spacing:.3em;font-size:.85rem}
+.panel{border:1.5px solid var(--line);border-radius:10px;padding:14px;margin-bottom:16px;background:#fffefa}
+.tag{display:inline-block;background:var(--g);color:#fff;font:600 1rem 'Playfair Display',serif;padding:6px 16px;border-radius:0 18px 18px 0;margin:-14px 0 12px -14px}
+.tag small{color:var(--gold);font-family:Lora,serif;font-weight:400;margin-left:6px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px 18px}
+label.f{display:flex;flex-direction:column;font-size:.9rem;font-weight:600;color:var(--g)}
+label.f select{font:inherit;font-weight:400;color:var(--ink);border:0;border-bottom:1.5px solid var(--g2);background:transparent;padding:6px 0;outline:none;border-radius:0;-webkit-appearance:none;appearance:none;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--g) 50%),linear-gradient(135deg,var(--g) 50%,transparent 50%);background-position:calc(100% - 12px) 55%,calc(100% - 7px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+label.f select:focus{border-bottom-color:var(--gold);box-shadow:0 2px 0 var(--gold)}
+label.f input,label.f textarea{font:inherit;font-weight:400;color:var(--ink);border:0;border-bottom:1.5px solid var(--g2);background:transparent;padding:6px 2px;outline:none;border-radius:0}
+label.f input:focus,label.f textarea:focus{border-bottom-color:var(--gold);box-shadow:0 2px 0 var(--gold)}
+.bad{color:var(--err)!important}.bad input{border-bottom-color:var(--err)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-bottom:16px}
+.cat{border:1.5px solid var(--line);border-radius:10px;padding:14px;background:#fffefa;transition:border-color .2s,background .2s}
+.cat.done{border-color:var(--g2);background:#f3f8e8}
+.cat.bad{border-color:var(--err)}
+.cat .tag{font-size:.95rem}
+.opt{display:flex;align-items:center;gap:12px;padding:10px 6px;cursor:pointer;border-radius:6px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.opt:hover{background:#f6edc4}
+.opt input{-webkit-appearance:none;appearance:none;width:22px;height:22px;border:1.8px solid var(--g);border-radius:3px;background:#fff;flex:none;display:grid;place-content:center;margin:0;cursor:pointer}
+.opt input:checked{background:var(--g) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3.2L13 4.8' fill='none' stroke='%23e0b84a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.opt input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opt.fixed{cursor:default}.opt.fixed:hover{background:none}
+.common{display:flex;flex-wrap:wrap;gap:6px 28px}
+textarea#notes{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:8px;background:#fff;font:inherit;padding:8px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--g);color:#fff;border-top:3px solid var(--gold);padding:10px 16px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;z-index:5}
+.bar .msg{font-size:.95rem}
+.bar .msg b{color:var(--gold);font-size:1.15rem}
+.meter{height:6px;background:#ffffff33;border-radius:3px;width:160px;overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+button.btn{font:600 1rem 'Playfair Display',serif;background:var(--gold);color:var(--g);border:0;border-radius:24px;padding:10px 24px;cursor:pointer}
+button.btn:hover{filter:brightness(1.08)}
+button.btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+button.ghost{background:transparent;color:var(--gold);border:1.5px solid var(--gold)}
+.hide{display:none!important}
+#rate{text-align:center}
+#rate .big{font:700 2.4rem 'Playfair Display',serif;color:var(--g)}
+/* full-screen guest menu & payment */
+#full{position:fixed;inset:0;background:#0a2e23;z-index:20;overflow:auto;padding:18px 12px 40px}
+.paper{max-width:600px;margin:0 auto;background:#fffdf7;color:var(--ink);border-radius:6px;box-shadow:0 12px 40px #0009;overflow:hidden;border-top:6px solid var(--gold)}
+.ph{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;padding:16px 18px;border-bottom:1px solid #e6dcc0}
+.ph .logo{height:56px;border:0;padding:0;border-radius:0;margin:0}
+.ph h2{font:700 1.55rem 'Playfair Display',serif;color:var(--g);margin:0;line-height:1.1}
+.ph small{font-style:italic;color:var(--g2);font-size:.82rem}
+.ph .ref{margin-left:auto;text-align:right;white-space:nowrap;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#7a6a3a}
+.ph .ref b{display:block;font-size:.92rem;color:var(--g);letter-spacing:.03em;text-transform:none}
+.band{background:linear-gradient(135deg,#0b3d2e,#15593f);color:#ecd48f;text-align:center;padding:10px 8px;font:700 1.1rem 'Playfair Display',serif;letter-spacing:.14em}
+.band small{display:block;font:400 .62rem Lora,serif;letter-spacing:.35em;color:#fff;margin-top:3px}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px;padding:14px 18px;background:#f6f1e2;font-size:.84rem}
+.info span{display:block;font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:#7a6a3a}
+.info b{font-weight:600;color:var(--g);word-break:break-word}
+.sec{padding:16px 18px 0}
+.sec h3{font:700 .9rem 'Playfair Display',serif;color:var(--g);letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;display:flex;align-items:center;gap:10px}
+.sec h3::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.mc{border:1px solid #e6dcc0;border-left:3px solid var(--gold);border-radius:4px;padding:7px 10px;background:#fff}
+.mc h4{margin:0 0 2px;font:600 .62rem Lora,serif;letter-spacing:.1em;text-transform:uppercase;color:var(--gd)}
+.mc ul{list-style:none;margin:0;padding:0}
+.mc li{font-size:.84rem;font-weight:600;color:var(--g);line-height:1.3;padding:1px 0}
+.mc em{font-style:normal;font-size:.64rem;color:#7a5200;background:#fbefcf;border-radius:8px;padding:1px 6px;margin-left:5px;white-space:nowrap}
+.cm{margin:10px 18px 0;padding:8px 10px;background:var(--g);color:#fff;border-radius:4px;font-size:.78rem;text-align:center}
+.cm b{color:#ecd48f;font-weight:600}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.hero div{border:1.5px solid var(--gold);border-radius:6px;padding:8px 12px;text-align:center}
+.hero small{display:block;font-size:.64rem;letter-spacing:.09em;text-transform:uppercase;color:#7a6a3a}
+.hero b{display:block;font:700 1.9rem 'Playfair Display',serif;color:var(--g);line-height:1.2}
+.hero i{display:block;font-style:normal;font-size:.7rem;color:#5b6b60}
+.paytbl{width:100%;border-collapse:collapse;font-size:.88rem}
+.paytbl td{padding:6px 0;border-bottom:1px dashed #e2d6b0}
+.paytbl td:last-child{text-align:right;font-weight:600;white-space:nowrap;padding-left:10px}
+.paytbl tr.tot td{border-bottom:0;border-top:2px solid var(--g);font:700 1.1rem 'Playfair Display',serif;color:var(--g);padding-top:9px}
+.pbox{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.pbox div{border-radius:6px;padding:10px 10px;text-align:center}
+.pbox .a{background:var(--g);color:#fff}
+.pbox .b{background:#f6f1e2;border:1.5px solid var(--gold);color:var(--g)}
+.pbox small{display:block;font-size:.64rem;letter-spacing:.07em;text-transform:uppercase;opacity:.9}
+.pbox b{display:block;font:700 1.55rem 'Playfair Display',serif;margin:2px 0}
+.pbox .a b{color:#ecd48f}
+.pbox i{display:block;font-style:normal;font-size:.7rem}
+.fine{font-size:.75rem;color:#44574c;padding:14px 18px 18px;line-height:1.5}
+.fine p{margin:0 0 5px}
+.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:18px auto 0;max-width:600px}
+.bk{display:flex;gap:8px 10px;align-items:center;justify-content:space-between;flex-wrap:wrap;border:1px solid;border-left-width:7px;border-radius:8px;padding:10px 12px;margin-bottom:10px}
+.bk.red{border-color:#c62828;background:#fdecea}
+.bk.amber{border-color:#d98300;background:#fff3dc}
+.bk.green{border-color:#1b7f3b;background:#e4f4e9}
+.bk small{display:block;color:#44574c;font-size:.82rem}
+.bk button{font:600 .85rem Lora,serif;border:1.5px solid var(--g);background:#fff;color:var(--g);border-radius:16px;padding:5px 14px;cursor:pointer;margin:2px 0 2px 6px}
+.bk button.del{border-color:var(--err);color:var(--err)}
+.bk button.paybtn{background:var(--g);color:#ecd48f}
+.st{display:inline-block;font:700 .66rem Lora,serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;border-radius:10px;padding:2px 9px;margin-left:6px;vertical-align:middle}
+.st.red{background:#c62828}.st.amber{background:#d98300}.st.green{background:#1b7f3b}
+.payform{flex-basis:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;background:#ffffffb0;border-radius:8px;padding:10px}
+.payform label{font-size:.75rem;font-weight:600;color:var(--g);display:flex;flex-direction:column}
+.payform input,.payform select{font:inherit;font-weight:400;padding:5px;border:1.5px solid var(--g2);border-radius:6px;background:#fff}
+.payform .row{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap}
+.pays{flex-basis:100%;margin:0;padding-left:18px;font-size:.8rem;color:#2c3f35}
+#shareMsg{margin-top:12px;font-size:.9rem;color:#f0dfae;text-align:center}
+.terms{margin:0;padding-left:20px}.terms li{margin:3px 0}
+.note p{margin:0 0 6px}.note p:last-child{margin:0}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.plan{position:relative;display:block;border:2px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff;-webkit-tap-highlight-color:transparent}
+.plan.sel{border-color:var(--g);background:#f3f8e8;box-shadow:0 0 0 2px var(--gold)}
+.plan:focus-within{outline:3px solid var(--gold);outline-offset:2px}
+.plan input{position:absolute;opacity:0;pointer-events:none}
+.plan b{display:block;font:700 1.15rem 'Playfair Display',serif;color:var(--g)}
+.plan span{font-size:.88rem;color:#44574c}
+.xtra{margin-top:6px;font-size:.85rem;font-weight:600;color:var(--gd)}
+.sessh{background:linear-gradient(135deg,#0b3d2e,#15593f);color:#ecd48f;font:700 1.15rem 'Playfair Display',serif;letter-spacing:.06em;padding:10px 16px;border-radius:10px;margin:0 0 14px}
+.sessh small{color:#fff;font:400 .8rem Lora,serif;margin-left:8px;letter-spacing:0}
+.plan.sel::after{content:"Selected";position:absolute;top:8px;right:10px;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--g);padding:2px 8px;border-radius:10px}
+.plan.off{opacity:.55;cursor:not-allowed;background:#f1ede0}
+.panel.warn{border-color:var(--err);box-shadow:0 0 0 1px var(--err)}
+.tg{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--g);border-radius:30px;overflow:hidden}
+.seg{position:relative;text-align:center;padding:12px 8px;font-weight:600;color:var(--g);cursor:pointer;background:#fff;-webkit-tap-highlight-color:transparent}
+.seg+.seg{border-left:2px solid var(--g)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg.sel{background:var(--g);color:#ecd48f}
+.seg:focus-within{outline:3px solid var(--gold);outline-offset:-3px}
+h5.sh{margin:14px 0 8px;font:700 .78rem Lora,serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gd)}
+h5.sh:first-child{margin-top:0}
+.opt em.pm{font-style:normal;font-size:.68rem;color:#7a5200;background:#fbefcf;border-radius:8px;padding:1px 7px;margin-left:4px;white-space:nowrap}
+.paytbl tr.sub td{font-weight:700;color:var(--g);border-bottom:1.5px solid #cdbb85}
+@media print{body *{visibility:hidden}#full,#full *{visibility:visible}#full{position:absolute;overflow:visible;background:#fff;padding:0}.paper{box-shadow:none}.acts{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" id="hlogo" src="logo.png" alt="Focus Prism logo">
+    <div>
+      <h1>Parivar Cafe</h1>
+      <p>Food for the Soul &middot; by Focus Prism</p>
+    </div>
+  </header>
+  <div class="banner"><h2>VEGETARIAN BANQUET MENU</h2><span>CELEBRATE &bull; CONNECT &bull; SAVOUR</span></div>
+ 
+  <form id="form" novalidate>
+    <section class="panel" aria-labelledby="cd">
+      <div class="tag" id="cd">Customer details</div>
+      <div class="fields">
+        <label class="f" id="l-date">Event date *<input type="date" id="date" required></label>
+        <label class="f" id="l-fp">FP ID (auto-generated)<input type="text" id="fp" readonly tabindex="-1" style="font-weight:600;color:var(--g);cursor:default"></label>
+        <label class="f" id="l-name">Name *<input type="text" id="name" required autocomplete="name"></label>
+        <label class="f" id="l-phone">Phone no. *<input type="tel" id="phone" inputmode="numeric" maxlength="10" placeholder="10-digit mobile" required autocomplete="tel"></label>
+        <label class="f" id="l-org">Organisation<input type="text" id="org" autocomplete="organization"></label>
+        <label class="f" id="l-event">Event *<select id="event" required>
+          <option value="">Select event</option>
+          <option>Birthday</option>
+          <option>Anniversary</option>
+          <option>Baby Shower</option>
+          <option>Custom Choice</option>
+        </select></label>
+        <label class="f hide" id="l-eventx">Your event (Custom Choice) *<input type="text" id="eventx" placeholder="e.g. Farewell, Get-together"></label>
+        <label class="f">Email (optional)<input type="email" id="email" autocomplete="email"></label>
+        <label class="f" style="grid-column:1/-1">Special requests<input type="text" id="req"></label>
+      </div>
+    </section>
+ 
+    <section class="panel" id="sessP" aria-labelledby="ss">
+      <div class="tag" id="ss">Choose your sessions <small>tick any or all</small></div>
+      <div class="plans" id="sessions"></div>
+      <p style="margin:10px 0 0;font-size:.9rem">The menu for each session you tick opens below. Hall charges are added once, however many sessions you book.</p>
+    </section>
+ 
+    <div id="blocks"></div>
+ 
+    <section class="panel">
+      <div class="tag">Additional notes <small>allergies / special preferences / others</small></div>
+      <textarea id="notes" aria-label="Additional notes"></textarea>
+    </section>
+ 
+    <section class="panel" id="terms" aria-labelledby="tt">
+      <div class="tag" id="tt">Booking &amp; cancellation terms</div>
+      <ul class="terms">
+        <li>The rate per plate depends on the sessions and menu you choose. It is shown, including tax, once your menu is complete.</li>
+        <li>Lunch and Dinner include one dish in every section. Extra dishes are charged per plate: extra paneer starter ₹75, extra vegetable starter ₹50, extra vegetable main course ₹35, extra bread ₹25 and extra dessert ₹50.</li>
+        <li>In AMT and PMT, cashew nut based snacks are charged ₹150 extra per plate.</li>
+        <li>Hall charges of ₹3,000 are added once to the total amount payable, however many sessions are booked.</li>
+        <li>To confirm the booking, pay an advance of 75% of the total amount. The full amount must be paid before the event.</li>
+        <li><b>Cancellation cannot be done in the last 3 days before the date of the event.</b></li>
+        <li><b>If the booking is cancelled, only 25% of the total amount is payable.</b></li>
+      </ul>
+    </section>
+ 
+    <section class="panel hide" id="rate" aria-live="polite">
+      <div>Your menu is complete. <span id="rplan"></span> rate</div>
+      <div class="big"><span id="rbig">₹630</span> <small style="font-size:.4em">per plate, including tax</small></div>
+      <div id="rextra"></div>
+      <div>plus hall charges of ₹3,000 added to the total</div>
+    </section>
+  </form>
+ 
+  <section class="panel" id="saved" aria-labelledby="sv">
+    <div class="tag" id="sv">Saved bookings <small>stored on this device</small></div>
+    <div id="bklist"></div>
+    <button type="button" class="btn" id="newbk" style="margin-top:8px">Start new booking</button>
+  </section>
+</div>
+ 
+<div class="bar">
+  <div class="msg"><span id="status">Choose a session to begin</span><div class="meter"><i id="meter"></i></div></div>
+  <button type="button" class="btn" id="go">Get My Quotation</button>
+</div>
+ 
+<div id="full" class="hide" role="dialog" aria-modal="true" aria-labelledby="ft">
+  <div class="paper">
+    <div class="ph">
+      <img class="logo" id="flogo" alt="Focus Prism logo">
+      <div><h2 id="ft">Parivar Cafe</h2><small>Food for the Soul &middot; by Focus Prism</small></div>
+      <div class="ref">Booking ref<b id="i-fp"></b>Issued <span id="i-issued"></span></div>
+    </div>
+    <div class="band">VEGETARIAN BANQUET MENU<small>BOOKING CONFIRMATION</small></div>
+    <div class="info">
+      <div><span>Guest</span><b id="i-name"></b></div>
+      <div><span>Phone</span><b id="i-phone"></b></div>
+      <div><span>Organisation</span><b id="i-org"></b></div>
+      <div><span>Event</span><b id="i-event"></b></div>
+      <div><span>Event date</span><b id="i-date"></b></div>
+      <div><span>Guests</span><b id="i-pax"></b></div>
+      <div><span>Sessions</span><b id="i-plan"></b></div>
+      <div><span>Special requests</span><b id="i-req"></b></div>
+    </div>
+    <div class="sec"><h3>Your menu<span id="menuCount"></span></h3><div id="menuList"></div></div>
+    <div class="sec">
+      <h3>Payment summary</h3>
+      <div class="hero">
+        <div><small id="rlLabel">Rate per plate</small><b id="rl"></b><i id="rbreak"></i></div>
+        <div><small>Total payable</small><b id="total"></b><i>including hall charges</i></div>
+      </div>
+      <table class="paytbl"><tbody id="payRows"></tbody></table>
+      <div class="pbox">
+        <div class="a"><small>Advance (75%)</small><b id="adv"></b><i>to confirm the booking</i></div>
+        <div class="b"><small>Balance (25%)</small><b id="bal"></b><i>before the event</i></div>
+      </div>
+    </div>
+    <div class="fine">
+      <p id="i-notes"></p>
+      <p>To confirm your booking, pay the advance of 75% of the total amount. The full amount must be paid before the event.</p>
+      <p><b>Cancellation policy:</b> Cancellation cannot be done in the last 3 days before the date of the event. If cancelled, only 25% of the total amount is payable (<span id="cxamt"></span>).</p>
+    </div>
+  </div>
+  <div class="acts">
+    <button class="btn" id="share" type="button">Send screenshot on WhatsApp</button>
+    <button class="btn" id="sharepdf" type="button">Send PDF on WhatsApp</button>
+    <button class="btn ghost" id="save" type="button">Save image</button>
+    <button class="btn ghost" id="savepdf" type="button">Save PDF</button>
+    <button class="btn ghost" id="print" type="button">Print</button>
+    <button class="btn ghost" id="back" type="button">Edit menu</button>
+  </div>
+  <div id="shareMsg" role="status"></div>
+</div>
+ 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const CAFE_WA = ""; // optional cafe WhatsApp number with country code, e.g. "919876543210"
+const HALL = 3000, ADV = 0.75;
+/* Lunch / Dinner: one dish per section is included in the base rate. In these sections a customer may add more dishes,
+   each extra dish being charged this amount per plate (added to the total plate cost). Other sections stay single choice. */
+const EXTRA_PRICE = { "Paneer starters": 75, "Vegetable starters": 50, "Main course – vegetable": 35, "Bread": 25, "Desserts": 50, "Dessert 2": 50 };
+/* Rates live here only: they are not shown while a customer is choosing sessions or dishes.
+   A session with a rate of null stays locked ("coming soon"). */
+const RATE = { bf: 450, amt: 250, pmt: 250, lunch: 630, dinner: 630 };
+const COMMON = ["Sambar", "Chutney", "Curd"];   // served to all in Lunch / Dinner
+const BF_FIXED = ["Hot Milk & Cold Milk (both served)", "Bread Toaster", "Jam & Butter", "Idly",
+                  "Medu Wada with Allam Chutney, Peanut Chutney & Sambar", "Tea / Coffee"];
+const BF = [["Fresh juice", ["Watermelon Juice", "Muskmelon Juice", "Pineapple Juice", "Milk Shakes"]],
+            ["Choice of cereals", ["Corn Flakes", "Wheat Flakes", "Chocolate Flakes"]],
+            ["Cut fruits", ["Watermelon", "Pineapple", "Muskmelon"], 2]];
+/* Cashew nut based snacks carry an extra charge per plate (AMT / PMT). */
+const PREMIUM = { "Cashew Pakora": 150, "Masala Cashew (Kaju Fry)": 150 };
+const TEA = [["Welcome drink / tea & coffee", ["Welcome Drink", "Tea and Coffee"], 1],
+             ["Cookies", ["Osmania", "Marie Biscuit", "Monaco", "Oats Cookies", "Chocolate Cookies"], 1],
+             ["Snacks", ["Aloo Bonda", "Samosa", "Kachori", "Onion Pakora", "Veg Pakora", "Potato Bhajji", "Plantain Bhajji", "Eggplant Bhajji", "Vegetable Croquette", "Spring Roll", "French Fries", "Cashew Pakora", "Masala Cashew (Kaju Fry)"], 1],
+             ["Dessert", ["Kala Jamun", "Gulab Jamun", "Milk Burfi"], 1]];
+const MENU = [
+  ["Welcome drink", ["Fresh Lime Mint Cooler","Masala Buttermilk","Aam Panna","Fresh Fruit Punch","Jaljeera"]],
+  ["Soup", ["Sweet Corn Soup","Tomato Basil Soup","Cream of Mushroom","Hot & Sour Soup","Lemon Coriander Soup","Manchow Soup"]],
+  ["Salads & accompaniments", ["Green Salad","Kachumber Salad","Kimchi Salad","Raita (Boondi / Cucumber)","Pickle & Papad"]],
+  ["Paneer starters", ["Paneer Tikka","Paneer Hariyali Kebab","Paneer Malai Tikka","Tandoori Paneer Bites","Chilli Paneer","Paneer 65","Schezwan Paneer"]],
+  ["Vegetable starters", ["Hara Bhara Kebab","Corn & Cheese Tikki","Vegetable Spring Rolls","Crispy Baby Corn","Aloo Tikki with Chutneys","Stuffed Mushroom","Veg Ball Manchurian","Gobi Manchurian"]],
+  ["Main course – paneer", ["Paneer Butter Masala","Kadai Paneer","Paneer Lababdar","Paneer Methi Malai"]],
+  ["Main course – vegetable", ["Mixed Vegetable Curry","Bhindi Masala","Baingan Bharta","Aloo Gobi","Navratan Korma","Methi Mutter Malai","Dum Aloo"]],
+  ["Dal", ["Dal Tadka","Dal Makhani","Panchratan Dal","Moong Dal"]],
+  ["Rice", ["Steamed Basmati Rice","Jeera Rice","Veg Pulao","Lemon Rice"]],
+  ["Variety rice", ["Veg Biryani","Tomato Rice","Coconut Rice","Curd Rice","Veg Hakka Noodles","Veg Fried Rice"]],
+  ["Bread", ["Phulka","Butter Naan","Garlic Naan","Tandoori Roti"]],
+  ["Desserts", ["Gulab Jamun","Rasmalai","Milk Cake","Malpua","Shahi Tukda (with Rabdi)","Fruit Custard"]],
+  ["Dessert 2", ["Mini Pineapple Pastry","Mini Chocolate Pastry","Mini Strawberry Pastry","Mini Butterscotch Pastry"]],
+  ["Ice cream", ["Vanilla Ice Cream","Strawberry Ice Cream","Chocolate Ice Cream","Butterscotch Ice Cream"]]
+];
+const SESS = {
+  bf:     { name: "Breakfast", short: "Breakfast", type: "bf", blurb: "Fresh juice, cereals, idly, medu wada, poori bhajji or aloo paratha, cut fruits, tea / coffee." },
+  amt:    { name: "AMT · Morning tea", short: "AMT", type: "tea", blurb: "Welcome drink or tea / coffee, cookies, one snack and a dessert." },
+  lunch:  { name: "Lunch", short: "Lunch", type: "full", blurb: "Starters, main course, dal, rice, bread and desserts. One dish per section, with paid extras." },
+  pmt:    { name: "PMT · Evening tea", short: "PMT", type: "tea", blurb: "Welcome drink or tea / coffee, cookies, one snack and a dessert." },
+  dinner: { name: "Dinner", short: "Dinner", type: "full", blurb: "Same menu and rules as lunch." }
+};
+const ORDER = ["bf", "amt", "lunch", "pmt", "dinner"];
+const CATS = { bf: BF, amt: TEA, lunch: MENU, pmt: TEA, dinner: MENU };
+ 
+const $ = id => document.getElementById(id);
+$("flogo").src = $("hlogo").src;
+const inr = n => "₹" + Math.round(n).toLocaleString("en-IN");
+const esc = t => String(t).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+ 
+/* ---------- build the screen ---------- */
+const ready = k => RATE[k] !== null;
+const full = k => SESS[k].type === "full";
+$("sessions").innerHTML = ORDER.map(k => {
+  const S = SESS[k], off = !ready(k);
+  return `<label class="plan${off ? " off" : ""}"><input type="checkbox" name="sess" id="s-${k}" value="${k}"${off ? " disabled" : ""}><b>${esc(S.name)}</b><span>${off ? "Coming soon." : esc(S.blurb)}</span></label>`;
+}).join("");
+ 
+const blockHtml = k => {
+  const S = SESS[k];
+  const fixedPanel = (title, list) => `<section class="panel"><div class="tag">${title}</div><div class="common">` +
+    list.map(x => `<label class="opt fixed"><input type="checkbox" checked disabled> ${esc(x)}</label>`).join("") + `</div></section>`;
+  return `<div id="blk-${k}" class="hide"><div class="sessh">${esc(S.name)}<small id="gh-${k}"></small></div>` +
+    `<section class="panel"><div class="fields"><label class="f" id="l-pax-${k}">No. of guests for ${esc(S.short)} *<input type="number" id="pax-${k}" min="1" step="1" inputmode="numeric" placeholder="e.g. 50"></label></div></section>` +
+    (full(k) ? `<section class="panel"><div class="tag">One dish per section <small>extras available</small></div>
+        <p style="margin:0;font-size:.9rem">One dish in every section is included. Want more? In these sections you can add extra dishes, charged per plate for each extra dish: ${Object.entries(EXTRA_PRICE).map(([t, p]) => `<b>${esc(t.replace(/^./, c => c.toUpperCase()))} ₹${p}</b>`).join(", ")}.</p></section>` : "") +
+    `<div class="grid" id="grid-${k}"></div>` +
+    (k === "bf" ? `<section class="panel" id="bfmainP"><div class="tag">Poori Bhajji or Aloo Paratha <small>choose one, not both</small></div>
+        <div class="tg"><label class="seg"><input type="radio" name="bfmain" value="Poori Bhajji with Curd">Poori Bhajji</label>
+        <label class="seg"><input type="radio" name="bfmain" value="Aloo Paratha with Curd">Aloo Paratha</label></div>
+        <p style="margin:8px 0 0;font-size:.88rem">Served with curd.</p></section>` + fixedPanel("Also served in breakfast", BF_FIXED) : "") +
+    (full(k) ? fixedPanel("Common items <small>served to all</small>", COMMON) : "") + `</div>`;
+};
+$("blocks").innerHTML = ORDER.map(blockHtml).join("");
+ORDER.forEach(k => {
+  $("grid-" + k).innerHTML = CATS[k].map(([t, items], i) =>
+    `<fieldset class="cat" id="f-${k}-${i}" style="margin:0"><legend class="tag">${esc(t)}<small class="lim"></small></legend>` +
+    items.map(x => `<label class="opt"><input type="checkbox" data-s="${k}" data-c="${i}" value="${esc(x)}"> <span>${esc(x)}${PREMIUM[x] ? ` <em class="pm">+₹${PREMIUM[x]}</em>` : ""}</span></label>`).join("") +
+    `<div class="xtra"></div></fieldset>`).join("");
+});
+ 
+/* ---------- selections and pricing ---------- */
+const sel = () => ORDER.filter(k => { const e = $("s-" + k); return e && e.checked && !e.disabled; });
+const boxes = (k, i) => [...document.querySelectorAll(`input[data-s="${k}"][data-c="${i}"]`)];
+const vals = (k, i) => boxes(k, i).filter(b => b.checked).map(b => b.value);
+const picks = k => CATS[k].map((c, i) => vals(k, i));
+const mainVal = () => (document.querySelector('input[name="bfmain"]:checked') || {}).value || null;
+const extraPrice = (k, i) => full(k) ? (EXTRA_PRICE[CATS[k][i][0]] || 0) : 0;   // per plate, for each dish beyond the first
+const limitOf = (k, i) => full(k) ? (extraPrice(k, i) ? Infinity : 1) : (CATS[k][i][2] || 1);
+const needOf = (k, i) => full(k) ? 1 : (CATS[k][i][2] || 1);
+const okCat = (k, i) => vals(k, i).length >= needOf(k, i);
+const fixedOf = k => k === "bf" ? BF_FIXED : full(k) ? COMMON : [];
+const rateOf = k => k === "bf" ? RATE.bf : RATE[k];
+function extraMap(k) {   // {category index: [price of each extra dish]}
+  const m = {};
+  if (!full(k)) return m;
+  CATS[k].forEach((c, i) => { const pr = extraPrice(k, i); if (pr) m[i] = Array(Math.max(0, vals(k, i).length - 1)).fill(pr); });
+  return m;
+}
+const sum = a => a.reduce((x, y) => x + y, 0);
+const extras = k => sum(Object.values(extraMap(k)).map(a => a.length));
+const extraCost = k => sum(Object.values(extraMap(k)).map(sum));
+const premCost = k => full(k) ? 0 : sum(CATS[k].flatMap((c, i) => vals(k, i)).map(v => PREMIUM[v] || 0));
+const breakdown = () => sel().map(k => ({ k, rate: rateOf(k), ex: extras(k), exCost: extraCost(k), prCost: premCost(k), plan: null }));
+const perPlate = () => breakdown().reduce((n, x) => n + x.rate + x.exCost + x.prCost, 0);
+const lbl = x => SESS[x.k].name + (x.plan ? ` (${x.plan})` : "");
+const sessLabel = b => b.map(lbl).join(" + ");
+const itemCount = b => b.reduce((n, x) => n + picks(x.k).reduce((m, a) => m + a.length, 0) + (x.k === "bf" ? 1 : 0) + fixedOf(x.k).length, 0);
+ 
+function refresh() {
+  const S = sel(), b = breakdown(), pl = b.map(x => x.rate + x.exCost + x.prCost);
+  ORDER.forEach(k => $("blk-" + k).classList.toggle("hide", !S.includes(k)));
+  document.querySelectorAll(".plan,.seg").forEach(l => l.classList.toggle("sel", l.querySelector("input").checked));
+  if (S.length) $("sessP").classList.remove("warn");
+  ORDER.forEach(k => {
+    const n = +$("pax-" + k).value;
+    $("gh-" + k).textContent = n > 0 ? ` · ${n} guest${n > 1 ? "s" : ""}` : "";
+    if (n >= 1) $("l-pax-" + k).classList.remove("bad");
+  });
+  if (mainVal()) $("bfmainP").classList.remove("warn");
+  ORDER.forEach(k => CATS[k].forEach((c, i) => {
+    const v = vals(k, i), fs = $(`f-${k}-${i}`), ok = okCat(k, i);
+    fs.classList.toggle("done", ok); if (ok) fs.classList.remove("bad");
+    const xp = extraPrice(k, i), em = xp ? extraMap(k)[i] : [], e = em.length, lim = limitOf(k, i);
+    fs.querySelector(".lim").textContent = xp ? `1 included · extra dish ₹${xp}/plate` : lim === 1 ? "choose 1 · tap another to change" : `choose ${full(k) ? "up to " : ""}${lim}`;
+    const pr = full(k) ? 0 : sum(v.map(x => PREMIUM[x] || 0));
+    fs.querySelector(".xtra").textContent = e ? `Extra dish${e > 1 ? "es" : ""}: ${e} × ₹${xp} = +₹${sum(em)} per plate` : pr ? `Cashew nut snack: +₹${pr} per plate` : "";
+  }));
+  // progress counts chosen dishes plus the fixed / common items of every selected session
+  let tot = 0, got = 0, done = S.length > 0;
+  S.forEach(k => {
+    const t = CATS[k].length + (k === "bf" ? 1 : 0), g = CATS[k].filter((c, i) => okCat(k, i)).length + (k === "bf" && mainVal() ? 1 : 0);
+    tot += t + fixedOf(k).length; got += g + fixedOf(k).length; if (g < t) done = false;
+  });
+  $("status").textContent = !tot ? "Choose a session to begin" : done ? `All ${tot} items selected · ${pl.map(inr).join(" + ")} per plate` : `${got} of ${tot} items selected`;
+  $("meter").style.width = (tot ? got / tot * 100 : 0) + "%";
+  $("rplan").textContent = sessLabel(b);
+  $("rbig").textContent = pl.map(inr).join(" + ");
+  $("rextra").textContent = b.length > 1 || b.some(x => x.ex || x.prCost)
+    ? b.map(x => `${SESS[x.k].short} ${inr(x.rate)}` + (x.ex ? ` + extras ${inr(x.exCost)}` : "") + (x.prCost ? ` + cashew snack ${inr(x.prCost)}` : "")).join(" + ") : "";
+  $("rate").classList.toggle("hide", !done);
+  $("go").textContent = done ? "View amount payable" : "Get My Quotation";
+}
+ 
+$("sessions").addEventListener("change", refresh);
+$("blocks").addEventListener("input", e => { if (e.target.id && e.target.id.startsWith("pax-")) refresh(); });
+$("blocks").addEventListener("change", e => {
+  const t = e.target;
+  if (t.dataset.s) {
+    const k = t.dataset.s, i = +t.dataset.c, lim = limitOf(k, i);
+    if (t.checked && lim !== Infinity) {
+      if (lim === 1) boxes(k, i).forEach(o => { if (o !== t) o.checked = false; });
+      else if (vals(k, i).length > lim) {
+        t.checked = false;
+        $("status").textContent = `Only ${lim} can be chosen in ${CATS[k][i][0]}. Untick one to change.`;
+        return;
+      }
+    }
+  }
+  refresh();
+});
+ 
+$("date").min = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+ 
+function validate() {
+  const bad = [];
+  const need = (id, ok) => { $("l-" + id).classList.toggle("bad", !ok); if (!ok) bad.push($("l-" + id)); };
+  need("date", !!$("date").value);
+  need("fp", $("fp").value.trim().length >= 3);
+  need("name", $("name").value.trim().length > 1);
+  need("phone", /^[6-9]\d{9}$/.test($("phone").value.trim()));
+  need("event", !!$("event").value);
+  need("eventx", $("event").value !== "Custom Choice" || $("eventx").value.trim().length > 1);
+  const S = sel();
+  if (!S.length) { $("sessP").classList.add("warn"); bad.push($("sessP")); }
+  S.forEach(k => { const ok = +$("pax-" + k).value >= 1; $("l-pax-" + k).classList.toggle("bad", !ok); if (!ok) bad.push($("l-pax-" + k)); });
+  S.forEach(k => CATS[k].forEach((c, i) => { if (!okCat(k, i)) { $(`f-${k}-${i}`).classList.add("bad"); bad.push($(`f-${k}-${i}`)); } }));
+  if (S.includes("bf") && !mainVal()) { $("bfmainP").classList.add("warn"); bad.push($("bfmainP")); }
+  if (bad.length) {
+    bad[0].scrollIntoView({ behavior: "smooth", block: "center" });
+    $("status").textContent = !S.length ? "Please choose at least one session" : "Please fill the highlighted fields";
+    return false;
+  }
+  return true;
+}
+ 
+function details() {
+  const b = breakdown().map(x => { const pax = +$("pax-" + x.k).value, plate = x.rate + x.exCost + x.prCost; return { ...x, pax, plate, food: pax * plate }; });
+  const food = sum(b.map(x => x.food)), total = food + HALL;
+  return { b, ex: sum(b.map(x => x.ex)), food, total, adv: total * ADV, bal: total - total * ADV };
+}
+ 
+const fmtDate = v => new Date(v + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" });
+ 
+function menuHtml(d) {
+  const li = (x, extra) => `<li>${esc(x)}${extra ? `<em>+₹${extra}</em>` : ""}</li>`;
+  const card = (t, items, wide) => `<div class="mc"${wide ? ' style="grid-column:1/-1"' : ""}><h4>${esc(t)}</h4><ul>${items}</ul></div>`;
+  return d.b.map(x => {
+    const k = x.k;
+    let h = `<h5 class="sh">${esc(lbl(x))} · ${x.pax} guest${x.pax > 1 ? "s" : ""}</h5><div class="mgrid">` +
+      CATS[k].map((c, i) => card(c[0], vals(k, i).map((v, j) => li(v, full(k) && extraPrice(k, i) && j >= 1 ? extraPrice(k, i) : (PREMIUM[v] || 0))).join(""))).join("");
+    if (k === "bf") h += card("Poori Bhajji / Aloo Paratha", li(mainVal())) + card("Also served", `<li style="font-weight:500">${BF_FIXED.map(esc).join(" · ")}</li>`, true);
+    h += `</div>`;
+    if (full(k)) h += `<div class="cm" style="margin:10px 0 0"><b>Served to all:</b> ${COMMON.join(" &middot; ")} <b>(${COMMON.length} items)</b></div>`;
+    return h;
+  }).join("");
+}
+ 
+$("go").addEventListener("click", () => {
+  if (!validate()) return;
+  const d = details(), v = id => $(id).value.trim() || "—";
+  $("i-fp").textContent = fpId();
+  $("i-issued").textContent = new Date().toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  $("i-name").textContent = v("name"); $("i-phone").textContent = v("phone"); $("i-org").textContent = v("org");
+  $("i-event").textContent = eventName() || "—"; $("i-date").textContent = fmtDate($("date").value);
+  $("i-pax").textContent = d.b.map(x => `${SESS[x.k].short} ${x.pax}`).join(" · ");
+  $("i-plan").textContent = sessLabel(d.b); $("i-req").textContent = v("req");
+  const nt = $("notes").value.trim(); $("i-notes").textContent = nt ? "Notes: " + nt : ""; $("i-notes").style.display = nt ? "" : "none";
+  if (d.b.length === 1) {
+    $("rlLabel").textContent = "Rate per plate"; $("rl").textContent = inr(d.b[0].plate);
+    $("rbreak").textContent = SESS[d.b[0].k].short + " · incl. tax";
+  } else {
+    $("rlLabel").textContent = "Sessions booked"; $("rl").textContent = d.b.length;
+    $("rbreak").textContent = d.b.map(x => SESS[x.k].short).join(" + ");
+  }
+  $("total").textContent = inr(d.total);
+  const rows = [];
+  d.b.forEach(x => {
+    const n0 = SESS[x.k].short;
+    rows.push([`${n0}${x.plan ? " (" + x.plan + ")" : ""} rate per plate (incl. tax)`, inr(x.rate)]);
+    if (x.ex) rows.push([`${n0} extra dish${x.ex > 1 ? "es" : ""} (${x.ex}) per plate`, inr(x.exCost)]);
+    if (x.prCost) rows.push([`${n0} cashew nut snack per plate`, inr(x.prCost)]);
+    rows.push([`${n0}: ${x.pax} guest${x.pax > 1 ? "s" : ""} × ${inr(x.plate)}`, inr(x.food), true]);
+  });
+  rows.push(["Hall charges (once)", inr(HALL)]);
+  $("payRows").innerHTML = rows.map(([a, b, sub]) => `<tr${sub ? ' class="sub"' : ""}><td>${esc(a)}</td><td>${b}</td></tr>`).join("") +
+    `<tr class="tot"><td>Total amount payable</td><td>${inr(d.total)}</td></tr>`;
+  $("adv").textContent = inr(d.adv);
+  $("bal").textContent = inr(d.bal);
+  $("cxamt").textContent = inr(d.total * 0.25);
+  saveBooking(d);
+  $("menuCount").textContent = " · " + itemCount(d.b) + " items";
+  $("menuList").innerHTML = menuHtml(d);
+  $("shareMsg").textContent = "";
+  shotBlob = null; shotReady = null; shotCanvas = null; pdfBlob = null;
+  setTimeout(() => { shotReady = makeShot().catch(() => null); }, 150);
+  $("full").classList.remove("hide");
+  $("full").scrollTop = 0;
+  document.body.style.overflow = "hidden";
+  $("back").focus();
+});
+$("back").addEventListener("click", () => { $("full").classList.add("hide"); document.body.style.overflow = ""; });
+$("print").addEventListener("click", () => window.print());
+let shotBlob = null, shotReady = null, shotCanvas = null, pdfBlob = null;
+async function makeShot() {
+  if (!window.html2canvas) throw new Error("lib");
+  const canvas = await html2canvas($("full"), {
+    backgroundColor: "#0a2e23", scale: Math.max(2, window.devicePixelRatio || 1), useCORS: true, scrollX: 0, scrollY: 0,
+    onclone: doc => {
+      const f = doc.getElementById("full");
+      f.style.cssText += ";position:relative;inset:auto;height:auto;overflow:visible;width:620px;padding:18px 10px 24px";
+      doc.querySelector(".acts").style.display = "none";
+      doc.getElementById("shareMsg").style.display = "none";
+    }
+  });
+  shotCanvas = canvas;
+  shotBlob = await new Promise(r => canvas.toBlob(r, "image/png"));
+  return shotBlob;
+}
+const getShot = async () => shotBlob || (shotReady ? await shotReady : null) || await makeShot();
+const fpId = () => $("fp").value.trim().toUpperCase();
+ 
+function msgText() {
+  const d = details(), g = n => `${n} guest${n > 1 ? "s" : ""}`, L = [
+    "*Parivar Cafe – Vegetarian Banquet Booking*",
+    `FP ID: ${fpId()}`,
+    `Name: ${$("name").value.trim()} (${$("phone").value.trim()})`,
+    `Event: ${eventName() || "-"} on ${$("date").value}`,
+    `Sessions: ${sessLabel(d.b)}`, ""
+  ];
+  d.b.forEach(x => {
+    const k = x.k;
+    L.push(`*${lbl(x)} – ${g(x.pax)}*`, ...CATS[k].map((c, i) => `${c[0]}: ${vals(k, i).join(", ")}`));
+    if (k === "bf") L.push(`Poori Bhajji / Aloo Paratha: ${mainVal()}`, "Also served: " + BF_FIXED.join(", "));
+    if (full(k)) L.push("Common: " + COMMON.join(", "));
+    L.push("");
+  });
+  L.push(`Total items: ${itemCount(d.b)}`, "");
+  if ($("notes").value.trim()) L.push(`Notes: ${$("notes").value.trim()}`, "");
+  d.b.forEach(x => {
+    const n0 = SESS[x.k].short;
+    L.push(`${n0}${x.plan ? " – " + x.plan : ""}: ${inr(x.rate)} per plate (incl. tax)`);
+    if (x.ex) L.push(`${n0} extra dishes (${x.ex}): ${inr(x.exCost)} per plate`);
+    if (x.prCost) L.push(`${n0} cashew nut snack: ${inr(x.prCost)} per plate`);
+    L.push(`${n0} food: ${g(x.pax)} × ${inr(x.plate)} = ${inr(x.food)}`);
+  });
+  L.push(`Hall charges: ${inr(HALL)}`, `Total payable: ${inr(d.total)}`,
+    `Advance 75% to confirm: ${inr(d.adv)}`, "Full payment to be made before the event.", "",
+    "Cancellation: cannot be done in the last 3 days before the event date. If cancelled, only 25% of the total amount (" + inr(d.total * 0.25) + ") is payable.");
+  return L.join("\n");
+}
+async function makePdf() {   // the screenshot, cut into A4 pages
+  await getShot();
+  const c = shotCanvas, J = window.jspdf && window.jspdf.jsPDF;
+  if (!c || !J) throw new Error("pdf");
+  const pdf = new J({ unit: "mm", format: "a4" }), W = 210, H = 297, pageH = Math.floor(c.width * H / W);
+  for (let y = 0, p = 0; y < c.height; y += pageH, p++) {
+    const h = Math.min(pageH, c.height - y), sl = document.createElement("canvas");
+    sl.width = c.width; sl.height = h;
+    sl.getContext("2d").drawImage(c, 0, y, c.width, h, 0, 0, c.width, h);
+    if (p) pdf.addPage();
+    pdf.setFillColor(10, 46, 35); pdf.rect(0, 0, W, H, "F");
+    pdf.addImage(sl.toDataURL("image/jpeg", 0.92), "JPEG", 0, 0, W, h * W / c.width);
+  }
+  return pdf.output("blob");
+}
+const getPdf = async () => pdfBlob || (pdfBlob = await makePdf());
+function download(blob, name) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+const kinds = {
+  img: { get: getShot, ext: ".png", type: "image/png", word: "screenshot" },
+  pdf: { get: getPdf, ext: ".pdf", type: "application/pdf", word: "PDF" }
+};
+const toWhatsApp = () => window.open(`https://wa.me/${CAFE_WA}?text=` + encodeURIComponent(msgText()), "_blank", "noopener");
+async function saveFile(kind) {
+  const K = kinds[kind];
+  try { download(await K.get(), fpId() + K.ext); $("shareMsg").textContent = `${K.word[0].toUpperCase() + K.word.slice(1)} saved to your device.`; }
+  catch (e) { $("shareMsg").textContent = `Could not create the ${K.word}. Please check your internet connection and try again, or take a normal phone screenshot.`; }
+}
+async function sendFile(btn, kind) {
+  const K = kinds[kind], label = btn.textContent;
+  btn.disabled = true; btn.textContent = `Preparing ${K.word}…`;
+  try {
+    const blob = await K.get(), name = fpId() + K.ext, file = new File([blob], name, { type: K.type });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], text: msgText() });   // choose WhatsApp in the share sheet
+    } else {
+      download(blob, name); toWhatsApp();
+      $("shareMsg").textContent = `${K.word[0].toUpperCase() + K.word.slice(1)} saved. WhatsApp opened with the booking details: attach the saved file to send it.`;
+    }
+  } catch (e) {
+    if (e.name !== "AbortError") {
+      toWhatsApp();
+      $("shareMsg").textContent = `Could not attach the ${K.word}. The booking details were sent as text: save the ${K.word} and attach it.`;
+    }
+  } finally { btn.disabled = false; btn.textContent = label; }
+}
+$("save").addEventListener("click", () => saveFile("img"));
+$("savepdf").addEventListener("click", () => saveFile("pdf"));
+$("share").addEventListener("click", () => sendFile($("share"), "img"));
+$("sharepdf").addEventListener("click", () => sendFile($("sharepdf"), "pdf"));
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !$("full").classList.contains("hide")) $("back").click(); });
+ 
+ 
+/* ---------- localStorage ---------- */
+const FIELDS = ["date","fp","name","phone","org","event","eventx","email","req","notes"];
+const SEQ = "parivarCafe.seq", DRAFT = "parivarCafe.draft", BOOKINGS = "parivarCafe.bookings";
+const load = (k, def) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : def; } catch (e) { return def; } };
+const store = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } };
+ 
+function snapshot() {
+  const o = {};
+  FIELDS.forEach(f => o[f] = $(f).value);
+  o.pax = {}; ORDER.forEach(k => o.pax[k] = $("pax-" + k).value);   // guests are entered per session
+  o.sess = sel(); o.picks = {};
+  ORDER.forEach(k => { o.picks[k] = picks(k); });
+  o.bfmain = mainVal();
+  return o;
+}
+function newFP() {
+  // FP + YYYYMMDD + daily running number, e.g. FP20261029-001
+  const day = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10).replace(/-/g, "");
+  const q = load(SEQ, { day: "", n: 0 });
+  const n = q.day === day ? q.n + 1 : 1;
+  store(SEQ, { day, n });
+  return "FP" + day + "-" + String(n).padStart(3, "0");
+}
+const eventName = () => $("event").value === "Custom Choice" ? ($("eventx").value.trim() || "Custom Choice") : $("event").value;
+function syncEvent() { $("l-eventx").classList.toggle("hide", $("event").value !== "Custom Choice"); }
+ 
+function norm(o) {   // older saves were lunch-only (picks was one array)
+  if (!o) return null;
+  const n = { ...o };
+  if (Array.isArray(o.picks)) { n.picks = { lunch: o.picks }; n.plans = { lunch: o.plan || "std" }; n.sess = o.sess || ["lunch"]; }
+  if (o.pax !== undefined && typeof o.pax !== "object") n.pax = Object.fromEntries(ORDER.map(k => [k, o.pax]));   // older saves had one guest count
+  n.picks = n.picks || {}; n.plans = n.plans || {}; n.sess = n.sess || [];
+  return n;
+}
+function apply(o0) {
+  const o = norm(o0);
+  FIELDS.forEach(f => $(f).value = (o && o[f]) || "");
+  if (!$("event").value && o && o.event) { $("event").value = "Custom Choice"; $("eventx").value = o.event; }   // older free-text events
+  ORDER.forEach(k => { $("pax-" + k).value = (o && o.pax && o.pax[k]) || ""; });
+  syncEvent();
+  if (!$("fp").value) $("fp").value = newFP();
+  ORDER.forEach(k => { const e = $("s-" + k); e.checked = !e.disabled && !!o && o.sess.includes(k); });
+  document.querySelectorAll("#blocks input[data-s]").forEach(i => {
+    const v = o && (o.picks[i.dataset.s] || [])[+i.dataset.c];
+    i.checked = Array.isArray(v) ? v.includes(i.value) : v === i.value;
+  });
+  document.querySelectorAll('input[name="bfmain"]').forEach(i => { i.checked = !!o && o.bfmain === i.value; });
+  document.querySelectorAll(".bad").forEach(e => e.classList.remove("bad"));
+  document.querySelectorAll(".warn").forEach(e => e.classList.remove("warn"));
+  refresh();
+}
+const saveDraft = () => store(DRAFT, snapshot());
+$("event").addEventListener("change", syncEvent);
+$("form").addEventListener("input", saveDraft);
+$("form").addEventListener("change", saveDraft);
+ 
+function saveBooking(d) {
+  const o = snapshot();
+  o.total = d.total; o.adv = d.adv; o.bal = d.bal; o.savedAt = new Date().toISOString();
+  const all = load(BOOKINGS, {}), key = o.date + "_" + o.fp.trim().toUpperCase();   // one booking per date + FP ID
+  if (all[key] && all[key].payments) o.payments = all[key].payments;               // keep payments when a booking is re-saved
+  all[key] = o;
+  store(BOOKINGS, all);
+  renderBookings();
+}
+/* payment status: red = advance (75%) not yet paid, amber = advance paid (booking confirmed), green = fully paid */
+function payState(b) {
+  const paid = sum((b.payments || []).map(p => +p.amt || 0)), tol = 0.5;
+  if (paid >= b.total - tol) return { cls: "green", label: "Fully paid", paid };
+  if (paid >= b.adv - tol) return { cls: "amber", label: "Advance paid", paid };
+  return { cls: "red", label: paid > 0 ? "Part paid · advance pending" : "Unpaid", paid };
+}
+const todayStr = () => new Date(Date.now() - new Date().getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+function renderBookings() {
+  const all = load(BOOKINGS, {});
+  const keys = Object.keys(all).sort();                 // date-wise order
+  $("bklist").innerHTML = keys.length ? keys.map(k => {
+    const b = all[k], st = payState(b), due = Math.max(0, b.total - st.paid), advDue = Math.max(0, b.adv - st.paid);
+    const dt = new Date(b.date + "T00:00").toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+    const po = b.pax && typeof b.pax === "object", ss = (b.sess || ["lunch"]).map(x => (SESS[x] ? SESS[x].short : x) + (po && b.pax[x] ? " " + b.pax[x] : "")).join(" + ");
+    const sug = Math.round(advDue > 0 ? advDue : due);
+    return `<div class="bk ${st.cls}" data-k="${esc(k)}"><div><b>${dt}</b> · FP ID ${esc(b.fp.toUpperCase())}<span class="st ${st.cls}">${st.label}</span>
+      <small>${esc(b.name)} · ${esc(ss)}${po ? " guests" : " · " + esc(b.pax) + " guests"} · Total ${inr(b.total)}</small>
+      <small>Paid ${inr(st.paid)} · Balance due ${inr(due)}${advDue > 0 ? ` · Advance still due ${inr(advDue)}` : ""}</small></div>
+      <div>${due > 0 ? `<button type="button" class="paybtn" data-act="pay">Record payment</button>` : ""}<button type="button" data-act="open">Open</button><button type="button" class="del" data-act="del">Delete</button></div>
+      <div class="payform hide">
+        <label>Amount received (₹)<input class="pf-amt" type="number" min="1" step="1" inputmode="numeric" value="${sug || ""}"></label>
+        <label>Paid by<select class="pf-mode"><option>UPI</option><option>Cash</option><option>Card</option><option>Bank transfer</option><option>Cheque</option></select></label>
+        <label>Date<input class="pf-date" type="date" value="${todayStr()}"></label>
+        <label>Reference / note<input class="pf-ref" type="text" placeholder="UPI ref, receipt no."></label>
+        <div class="row"><button type="button" class="paybtn" data-act="save">Save payment</button><button type="button" data-act="cancel">Cancel</button></div>
+      </div>
+      ${(b.payments || []).length ? `<ul class="pays">${b.payments.map(p => `<li>${inr(p.amt)} · ${esc(p.mode)} · ${esc(p.date)}${p.ref ? " · " + esc(p.ref) : ""}</li>`).join("")}</ul><div style="flex-basis:100%"><button type="button" data-act="undo">Undo last payment</button></div>` : ""}</div>`;
+  }).join("") : "<p style='margin:0;color:#5b6b60'>No saved bookings yet. A booking is saved when you view the amount payable.</p>";
+}
+$("bklist").addEventListener("click", e => {
+  const t = e.target, row = t.closest(".bk"), act = t.dataset.act;
+  if (!row || !act) return;
+  const k = row.dataset.k, all = load(BOOKINGS, {}), b = all[k];
+  if (!b) return;
+  if (act === "pay") row.querySelector(".payform").classList.toggle("hide");
+  else if (act === "cancel") row.querySelector(".payform").classList.add("hide");
+  else if (act === "save") {
+    const amt = Math.round(+row.querySelector(".pf-amt").value);
+    if (!(amt > 0)) { row.querySelector(".pf-amt").focus(); return; }
+    b.payments = [...(b.payments || []), { amt, mode: row.querySelector(".pf-mode").value, date: row.querySelector(".pf-date").value || todayStr(),
+      ref: row.querySelector(".pf-ref").value.trim(), at: new Date().toISOString() }];
+    store(BOOKINGS, all); renderBookings();
+  }
+  else if (act === "undo") { if (confirm("Remove the last recorded payment?")) { (b.payments || []).pop(); store(BOOKINGS, all); renderBookings(); } }
+  else if (act === "open") { apply(b); saveDraft(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  else if (act === "del" && confirm("Delete this saved booking?")) { delete all[k]; store(BOOKINGS, all); renderBookings(); }
+});
+$("newbk").addEventListener("click", () => {
+  if (confirm("Clear the form and start a new booking?")) { try { localStorage.removeItem(DRAFT); } catch (e) {} apply(null); saveDraft(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+});
+ 
+apply(load(DRAFT, null));
+saveDraft();
+renderBookings();
+</script>
+</body>
+</html>
